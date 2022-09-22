@@ -1,0 +1,6 @@
+type,sku#,itemdescription,price
+ADD,100,Samsung TV,500
+ADD,101,LG TV,500
+**************************
+Nuevo,300,Sony Smart TV,550
+ADD,400,TCL Smart TV, 450
