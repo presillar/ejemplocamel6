@@ -1,6 +1,7 @@
 # EjemploCamel6
 
-Ejemplo del uso del framework Camel con Spring Boot y rutas construidas a medida; con una clase.
+Ejemplo del uso del framework Camel con Spring Boot y rutas construidas a medida; con una clase. Aplicando pruebas con 
+Mock.
 
 ## Para Agregar el repositorio remoto a un proyecto existente
 ```
@@ -20,7 +21,7 @@ git push -uf origin main
 ## Instalación
 * Compile el proyecto con el IDE de su preferencia.
 * Ingrese a la consola y dirijase a la raíz del proyecto.
-* Ejecute desde la consola: java -jar CamelApplication.jar
+* Ejecute desde la consola: java -jar /target/CamelMockTestingApplication.jar
 
 ## Authors and acknowledgment
 [GitLab: alfaCentauri1](https://gitlab.com/alfaCentauri1)
