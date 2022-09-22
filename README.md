@@ -21,7 +21,7 @@ git push -uf origin main
 ## Instalación
 * Compile el proyecto con el IDE de su preferencia.
 * Ingrese a la consola y dirijase a la raíz del proyecto.
-* Ejecute desde la consola: java -jar /target/CamelMockTestingApplication.jar
+* Ejecute desde la consola: java -jar target/camel-mock-testing-1.0.jar
 
 ## Authors and acknowledgment
 [GitLab: alfaCentauri1](https://gitlab.com/alfaCentauri1)

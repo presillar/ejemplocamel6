@@ -4,3 +4,4 @@ ADD,101,LG TV,500
 **************************
 Nuevo,300,Sony Smart TV,550
 ADD,400,TCL Smart TV, 450
+Nuevo,500,Phillis Smart TV,435
