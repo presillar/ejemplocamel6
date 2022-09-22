@@ -13,8 +13,12 @@ public class SimpleCamelRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("{{startRoute}}")
-                .log("Timer Invoked and the body ${body}.\n!!! " + environment.getProperty("message") + " ¡¡¡")
-                .pollEnrich("{{fromRoute}}")
+                .log("Timer Invoked and the body \n!!! " + environment.getProperty("message") + " ¡¡¡")
+                .choice()
+                    .when( ( header("env").isNotEqualTo("mock")))
+                        .pollEnrich("{{fromRoute}}")
+                    .otherwise()
+                        .log("Mock env flow and the body is ${body}")
                 .to("{{toRoute1}}");
     }
 }

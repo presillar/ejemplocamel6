@@ -35,3 +35,13 @@ toRoute1: file:data/output
 
 message: PROD Environment
 ---
+spring:
+  profiles: mock
+
+startRoute: direct:input
+#fromRoute : file:data/input?delete=true&readLock=none
+toRoute1: mock/output
+
+
+message: MOCK Environment
+---
