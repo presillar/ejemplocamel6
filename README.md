@@ -5,7 +5,7 @@ Ejemplo del uso del framework Camel con Spring Boot y rutas construidas a medida
 ## Para Agregar el repositorio remoto a un proyecto existente
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/alfaCentauri1/ejemplocamel3.git
+git remote add origin https://gitlab.com/alfaCentauri1/ejemplocamel6.git
 git branch -M main
 git push -uf origin main
 ```
