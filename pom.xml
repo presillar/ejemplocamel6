@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.alfaCentauri</groupId>
 	<artifactId>camel-mock-testing</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>camel-mock-testing</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Proyecto de ejemplo del uso de Camel con Spring Boot y JUnit</description>
 	<properties>
 		<java.version>18</java.version>
 	</properties>
