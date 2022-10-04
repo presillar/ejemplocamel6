@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.StandardEnvironment;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -72,6 +73,7 @@ public class SimpleCamelRouteMockTest {
         mockEndpoint = new MockEndpoint();
         context = new SimpleCamelContext();
         producerTemplate = new DefaultProducerTemplate(context);
+        environment = new StandardEnvironment();
     }
 
     @Test
@@ -90,10 +92,10 @@ public class SimpleCamelRouteMockTest {
                 "ADD,100,Samsung TV,500\n" +
                 "ADD,101,LG TV,500";
         MockEndpoint mockEndpoint = new MockEndpoint();
-        mockEndpoint.setEndpointUriIfNotSpecified (environment.getProperty("toRoute1"));
+        mockEndpoint.setEndpointUriIfNotSpecified ("mock/output");
         mockEndpoint.expectedMessageCount(1);
         mockEndpoint.expectedBodiesReceived(message);
-        producerTemplate.sendBodyAndHeader( environment.getProperty("startRoute"), message, "env", environment.getProperty("spring.profiles.active") );
+        producerTemplate.sendBodyAndHeader( "direct:input", message, "env", "mock" );
         mockEndpoint.assertIsSatisfied();
     }
 }
