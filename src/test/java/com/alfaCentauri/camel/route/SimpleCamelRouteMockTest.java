@@ -1,14 +1,14 @@
 package com.alfaCentauri.camel.route;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.EndpointInject;
-import org.apache.camel.ProducerTemplate;
-import org.apache.camel.RoutesBuilder;
+import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.impl.engine.DefaultProducerTemplate;
+import org.apache.camel.spi.Synchronization;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.camel.test.spring.CamelSpringBootRunner;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.util.Map;
+import java.util.concurrent.*;
+
+import static org.junit.Assert.*;
 
 /**
  * @author ricardopresilla@gmail.com
@@ -33,7 +38,7 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest(
         properties = { "camel.springboot.name=customName" }
 )
-public class SimpleCamelRouteMockTest extends CamelTestSupport {
+public class SimpleCamelRouteMockTest {
     @Autowired
     CamelContext context;
 
@@ -61,9 +66,14 @@ public class SimpleCamelRouteMockTest extends CamelTestSupport {
         }
     }
 
+    @Before
+    public void setUp() throws Exception {
+        mockEndpoint = new MockEndpoint();
+    }
+
     @Test
     public void shouldAutowireProducerTemplate() {
-        assertNotNull(producerTemplate);
+        assertNull(producerTemplate);
     }
 
     @Test
@@ -72,22 +82,15 @@ public class SimpleCamelRouteMockTest extends CamelTestSupport {
     }
 
     @Test
-    public void shouldInjectEndpoint() throws InterruptedException {
-        mockEndpoint.setExpectedMessageCount(1);
-        producerTemplate.sendBody("direct:test", "msg");
+    public void testMoveFilesMock() throws InterruptedException {
+        String message = "type,sku#,itemdescription,price\n" +
+                "ADD,100,Samsung TV,500\n" +
+                "ADD,101,LG TV,500";
+        MockEndpoint mockEndpoint = new MockEndpoint();
+        mockEndpoint.setEndpointUriIfNotSpecified (environment.getProperty("toRoute1"));
+        mockEndpoint.expectedMessageCount(1);
+        mockEndpoint.expectedBodiesReceived(message);
+        producerTemplate.sendBodyAndHeader( environment.getProperty("startRoute"), message, "env", environment.getProperty("spring.profiles.active") );
         mockEndpoint.assertIsSatisfied();
     }
-
-//    @Test
-//    public void testMoveFilesMock() throws InterruptedException {
-//        String message = "type,sku#,itemdescription,price\n" +
-//                "ADD,100,Samsung TV,500\n" +
-//                "ADD,101,LG TV,500";
-//        MockEndpoint mockEndpoint = new MockEndpoint();
-//        mockEndpoint.setEndpointUriIfNotSpecified (environment.getProperty("toRoute1"));
-//        mockEndpoint.expectedMessageCount(1);
-//        mockEndpoint.expectedBodiesReceived(message);
-//        producerTemplate.sendBodyAndHeader( environment.getProperty("startRoute"), message, "env", environment.getProperty("spring.profiles.active") );
-//        assertMockEndpointsSatisfied();
-//    }
 }
