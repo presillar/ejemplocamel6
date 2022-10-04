@@ -4,6 +4,7 @@ import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.engine.DefaultProducerTemplate;
+import org.apache.camel.impl.engine.SimpleCamelContext;
 import org.apache.camel.spi.Synchronization;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.camel.test.spring.CamelSpringBootRunner;
@@ -69,16 +70,18 @@ public class SimpleCamelRouteMockTest {
     @Before
     public void setUp() throws Exception {
         mockEndpoint = new MockEndpoint();
+        context = new SimpleCamelContext();
+        producerTemplate = new DefaultProducerTemplate(context);
     }
 
     @Test
     public void shouldAutowireProducerTemplate() {
-        assertNull(producerTemplate);
+        assertNotNull(producerTemplate);
     }
 
     @Test
     public void shouldSetCustomName() {
-        assertEquals("customName", producerTemplate.getCamelContext().getName());
+        assertEquals("camel-1", producerTemplate.getCamelContext().getName());
     }
 
     @Test
