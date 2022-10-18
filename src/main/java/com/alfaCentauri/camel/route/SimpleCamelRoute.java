@@ -17,8 +17,9 @@ public class SimpleCamelRoute extends RouteBuilder {
                 .choice()
                     .when( ( header("env").isNotEqualTo("mock")))
                         .pollEnrich("{{fromRoute}}")
-                    .otherwise()
-                        .log("Mock env flow and the body is ${body}")
+                .endChoice()
+                .otherwise()
+                    .log("Mock env flow and the body is ${body}")
                 .end()
                 .to("{{toRoute1}}");
     }

@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: mock
 camel.springboot.shutdownTimeout: 2
 
 ---
@@ -39,8 +39,8 @@ spring:
   profiles: mock
 
 startRoute: direct:input
-#fromRoute : file:data/input?delete=true&readLock=none
-toRoute1: data/mock/output
+fromRoute : file:data/input?delete=true&readLock=none
+toRoute1: mock/output
 
 
 message: MOCK Environment
