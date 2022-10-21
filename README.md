@@ -1,7 +1,7 @@
 # EjemploCamel6
 
-Ejemplo del uso del framework Camel con Spring Boot y rutas construidas a medida; con una clase. Aplicando pruebas con 
-Mock.
+Ejemplo del uso del framework Camel con Spring Boot y rutas construidas a medida; con una clase. Aplicando choices para 
+seleccionar entre las rutas de funcionamiento normal y pruebas con Mock.
 
 ## Para Agregar el repositorio remoto a un proyecto existente
 ```
